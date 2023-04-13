@@ -22,11 +22,47 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  *
  */
-function getDNSStats(/* domains */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function getDNSStats(domains) {
+    throw new NotImplementedError('Not implemented');
+
+    // const res = {};
+    // const splited = [];
+    //
+    // domains.forEach(domain => {
+    //     splited.push(domain.split('.'));
+    //     splited.sort();
+    // });
+
+    // for (let i = 0; i < splited.length; i++) {
+    //     if (domains.find(e => {
+    //         console.log(e, splited[i].join('.'));
+    //         return e === splited[i].join('.');
+    //     })) {
+    //         const str = `.${ splited[i].reverse().join('.') }`;
+    //         res[str] = res[str] ? res[str]++ : res[str] = 1;
+    //     }
+    // }
+
+    // console.log(domains);
+    // let i = 0;
+    // const str = [];
+    // for (const dom of domains) {
+    //     str.push(dom.split('.').reverse()[i]);
+    //     console.log(dom.split('.').reverse());
+    //     console.log(dom.split('.').reverse()[i]);
+    //     domains.forEach(elem => {
+    //         if (elem.includes(str.join('.'))) {
+    //             const str = `.${ splited[i].reverse().join('.') }`;
+    //             res[str] = res[str] ? res[str] + 1 : res[str] = 1;
+    //         }
+    //     });
+    //
+    //     i++;
+    // }
+    //
+    // return res;
 }
 
 module.exports = {
-  getDNSStats
+    getDNSStats
 };
