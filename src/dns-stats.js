@@ -1,4 +1,5 @@
 const { NotImplementedError } = require('../extensions/index.js');
+const domain = require('domain');
 
 /**
  * Given an array of domains, return the object with the appearances of the DNS.
@@ -23,45 +24,23 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function getDNSStats(domains) {
-    throw new NotImplementedError('Not implemented');
+    if (domains.length === 0) return {};
+    const res = {};
+    domains.push(domains[0].slice(domains[0].lastIndexOf('.') + 1));
 
-    // const res = {};
-    // const splited = [];
-    //
-    // domains.forEach(domain => {
-    //     splited.push(domain.split('.'));
-    //     splited.sort();
-    // });
+    for (let i = 0; i < domains.length; i++) {
+        for (let j = 0; j < domains.length - 1; j++) {
+            if (domains[j].match(domains[i])) {
+                const dom = `.${ domains[i].split('.').reverse().join('.') }`;
+                res[dom] ? res[dom] += 1 : res[dom] = 1;
+            }
+        }
+    }
 
-    // for (let i = 0; i < splited.length; i++) {
-    //     if (domains.find(e => {
-    //         console.log(e, splited[i].join('.'));
-    //         return e === splited[i].join('.');
-    //     })) {
-    //         const str = `.${ splited[i].reverse().join('.') }`;
-    //         res[str] = res[str] ? res[str]++ : res[str] = 1;
-    //     }
-    // }
-
-    // console.log(domains);
-    // let i = 0;
-    // const str = [];
-    // for (const dom of domains) {
-    //     str.push(dom.split('.').reverse()[i]);
-    //     console.log(dom.split('.').reverse());
-    //     console.log(dom.split('.').reverse()[i]);
-    //     domains.forEach(elem => {
-    //         if (elem.includes(str.join('.'))) {
-    //             const str = `.${ splited[i].reverse().join('.') }`;
-    //             res[str] = res[str] ? res[str] + 1 : res[str] = 1;
-    //         }
-    //     });
-    //
-    //     i++;
-    // }
-    //
-    // return res;
+    return res;
 }
+
+console.log(getDNSStats([ 'code.yandex.ru', 'music.yandex.ru', 'yandex.ru' ]));
 
 module.exports = {
     getDNSStats
